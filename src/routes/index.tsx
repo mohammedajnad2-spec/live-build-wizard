@@ -76,7 +76,7 @@ function HomePage() {
           <p className="text-xs font-semibold text-destructive">
             تم بث {alerts.length} نداء استغاثة عبر الشبكة
           </p>
-          <p className="mt-1 text-[11px] text-muted-foreground">آخر نداء: {alerts[0].at}</p>
+          <p className="mt-1 text-[11px] text-muted-foreground">آخر نداء: {alerts[0]?.at}</p>
         </div>
       )}
 
