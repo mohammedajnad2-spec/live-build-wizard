@@ -12,9 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AlertRouteImport } from './routes/alert'
 import { Route as DevicesRouteImport } from './routes/devices'
+import { Route as NodesRouteImport } from './routes/nodes'
 import { Route as PairRouteImport } from './routes/pair'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as SosRouteImport } from './routes/sos'
+import { Route as CallIndexRouteImport } from './routes/call.index'
 import { Route as CallPeerIdRouteImport } from './routes/call.$peerId'
+import { Route as ChatIndexRouteImport } from './routes/chat.index'
 import { Route as ChatPeerIdRouteImport } from './routes/chat.$peerId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -32,6 +36,11 @@ const DevicesRoute = DevicesRouteImport.update({
   path: '/devices',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NodesRoute = NodesRouteImport.update({
+  id: '/nodes',
+  path: '/nodes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PairRoute = PairRouteImport.update({
   id: '/pair',
   path: '/pair',
@@ -42,9 +51,24 @@ const SettingsRoute = SettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SosRoute = SosRouteImport.update({
+  id: '/sos',
+  path: '/sos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CallIndexRoute = CallIndexRouteImport.update({
+  id: '/call/',
+  path: '/call/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CallPeerIdRoute = CallPeerIdRouteImport.update({
   id: '/call/$peerId',
   path: '/call/$peerId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatIndexRoute = ChatIndexRouteImport.update({
+  id: '/chat/',
+  path: '/chat/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChatPeerIdRoute = ChatPeerIdRouteImport.update({
@@ -57,29 +81,41 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/alert': typeof AlertRoute
   '/devices': typeof DevicesRoute
+  '/nodes': typeof NodesRoute
   '/pair': typeof PairRoute
   '/settings': typeof SettingsRoute
+  '/sos': typeof SosRoute
   '/call/$peerId': typeof CallPeerIdRoute
   '/chat/$peerId': typeof ChatPeerIdRoute
+  '/call/': typeof CallIndexRoute
+  '/chat/': typeof ChatIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/alert': typeof AlertRoute
   '/devices': typeof DevicesRoute
+  '/nodes': typeof NodesRoute
   '/pair': typeof PairRoute
   '/settings': typeof SettingsRoute
+  '/sos': typeof SosRoute
   '/call/$peerId': typeof CallPeerIdRoute
   '/chat/$peerId': typeof ChatPeerIdRoute
+  '/call': typeof CallIndexRoute
+  '/chat': typeof ChatIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/alert': typeof AlertRoute
   '/devices': typeof DevicesRoute
+  '/nodes': typeof NodesRoute
   '/pair': typeof PairRoute
   '/settings': typeof SettingsRoute
+  '/sos': typeof SosRoute
   '/call/$peerId': typeof CallPeerIdRoute
   '/chat/$peerId': typeof ChatPeerIdRoute
+  '/call/': typeof CallIndexRoute
+  '/chat/': typeof ChatIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,38 +123,54 @@ export interface FileRouteTypes {
     | '/'
     | '/alert'
     | '/devices'
+    | '/nodes'
     | '/pair'
     | '/settings'
+    | '/sos'
     | '/call/$peerId'
     | '/chat/$peerId'
+    | '/call/'
+    | '/chat/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/alert'
     | '/devices'
+    | '/nodes'
     | '/pair'
     | '/settings'
+    | '/sos'
     | '/call/$peerId'
     | '/chat/$peerId'
+    | '/call'
+    | '/chat'
   id:
     | '__root__'
     | '/'
     | '/alert'
     | '/devices'
+    | '/nodes'
     | '/pair'
     | '/settings'
+    | '/sos'
     | '/call/$peerId'
     | '/chat/$peerId'
+    | '/call/'
+    | '/chat/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AlertRoute: typeof AlertRoute
   DevicesRoute: typeof DevicesRoute
+  NodesRoute: typeof NodesRoute
   PairRoute: typeof PairRoute
   SettingsRoute: typeof SettingsRoute
+  SosRoute: typeof SosRoute
   CallPeerIdRoute: typeof CallPeerIdRoute
   ChatPeerIdRoute: typeof ChatPeerIdRoute
+  CallIndexRoute: typeof CallIndexRoute
+  ChatIndexRoute: typeof ChatIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -144,6 +196,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/nodes': {
+      id: '/nodes'
+      path: '/nodes'
+      fullPath: '/nodes'
+      preLoaderRoute: typeof NodesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pair': {
       id: '/pair'
       path: '/pair'
@@ -158,11 +217,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sos': {
+      id: '/sos'
+      path: '/sos'
+      fullPath: '/sos'
+      preLoaderRoute: typeof SosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/call/': {
+      id: '/call/'
+      path: '/call'
+      fullPath: '/call/'
+      preLoaderRoute: typeof CallIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/call/$peerId': {
       id: '/call/$peerId'
       path: '/call/$peerId'
       fullPath: '/call/$peerId'
       preLoaderRoute: typeof CallPeerIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat/': {
+      id: '/chat/'
+      path: '/chat'
+      fullPath: '/chat/'
+      preLoaderRoute: typeof ChatIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chat/$peerId': {
@@ -179,10 +259,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AlertRoute: AlertRoute,
   DevicesRoute: DevicesRoute,
+  NodesRoute: NodesRoute,
   PairRoute: PairRoute,
   SettingsRoute: SettingsRoute,
+  SosRoute: SosRoute,
   CallPeerIdRoute: CallPeerIdRoute,
   ChatPeerIdRoute: ChatPeerIdRoute,
+  CallIndexRoute: CallIndexRoute,
+  ChatIndexRoute: ChatIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
