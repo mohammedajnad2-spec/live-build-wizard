@@ -56,7 +56,7 @@ function ChatPage() {
 
       <div className="flex-1 space-y-3 px-4 py-5">
         {thread.map((m) => (
-          <div key={m.id} className={`flex ${m.mine ? "justify-start" : "justify-end"}`}>
+          <div key={m.id} className={`flex ${m.mine ? "justify-end" : "justify-start"}`}>
             <div
               className={`max-w-[78%] rounded-2xl px-4 py-2.5 text-sm ${
                 m.mine
@@ -105,7 +105,7 @@ function ChatPage() {
         className="sticky bottom-0 flex items-center gap-2 border-t border-border/60 bg-card/95 px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur-xl"
       >
         {recording ? (
-          <div className="flex flex-1 items-center gap-2 rounded-xl border border-destructive/50 bg-destructive/10 px-3 py-2.5">
+          <div className="flex min-w-0 flex-1 items-center gap-2 rounded-xl border border-destructive/50 bg-destructive/10 px-3 py-2.5">
             <span className="size-2 animate-pulse rounded-full bg-destructive" />
             <span className="font-mono text-xs text-destructive">جارٍ التسجيل {elapsed}s</span>
             <span className="ms-auto flex items-end gap-0.5">
@@ -123,7 +123,7 @@ function ChatPage() {
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
             placeholder="اكتب رسالة مشفّرة…"
-            className="flex-1 rounded-xl border border-border bg-background px-3 py-2.5 text-sm text-foreground outline-none focus:border-primary"
+            className="min-w-0 flex-1 rounded-xl border border-border bg-background px-3 py-2.5 text-sm text-foreground outline-none focus:border-primary"
           />
         )}
 
